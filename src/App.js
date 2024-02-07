@@ -11,55 +11,68 @@ import Col from "react-bootstrap/Col";
 import Films from "./Films";
 import MyFooter from "./MyFooter";
 import CercaFilm from "./CercaFilm";
+import TvShows from "./TvShows";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MovieDetails from "./MovieDetails";
 
 function App() {
   return (
-    <div className="App bg-black">
-      <header>
-        <CustomNavbar></CustomNavbar>
-      </header>
-      <main>
-        <Container fluid className="p-5 mt-2">
-          <Row>
-            <CercaFilm></CercaFilm>
-          </Row>
+    <div className="App bg-black d-flex flex-column" style={{ height: "100%" }}>
+      <BrowserRouter>
+        <header>
+          <CustomNavbar></CustomNavbar>
+        </header>
+        <main className="flex-grow-1">
+          <Container fluid className="p-5 mt-2">
+            <Routes>
+              <Route element={<TvShows></TvShows>} path="/TvShows" />
+              <Route
+                element={
+                  <div>
+                    <UnderNavbar className="mt-3"></UnderNavbar>
+                    <Row>
+                      <Col>
+                        <RowTitle text="Preferiti"></RowTitle>
+                      </Col>
+                    </Row>
+                    <Row xs={2} md={4} lg={6}>
+                      <Films nameOfFilm="Harry-Potter"></Films>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <RowTitle text="Le tue scelte"></RowTitle>
+                      </Col>
+                    </Row>
+                    <Row xs={2} md={4} lg={6}>
+                      <Films nameOfFilm="Twilight"></Films>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <RowTitle text="Le nostre scelte per te"></RowTitle>
+                      </Col>
+                    </Row>
+                    <Row xs={2} md={4} lg={6}>
+                      <Films nameOfFilm="Pirates of the Caribbean"></Films>
+                    </Row>
+                  </div>
+                }
+                path="/Home"
+              />
+              <Route
+                element={<MovieDetails></MovieDetails>}
+                path="/Movies/:filmId"
+              />
+            </Routes>
 
-          <UnderNavbar className="mt-3"></UnderNavbar>
-          <Row>
-            <Col>
-              <RowTitle text="Preferiti"></RowTitle>
-            </Col>
-          </Row>
-
-          <Row xs={2} md={4} lg={6}>
-            <Films nameOfFilm="Harry-Potter"></Films>
-          </Row>
-          <Row>
-            <Col>
-              <RowTitle text="Le tue scelte"></RowTitle>
-            </Col>
-          </Row>
-
-          <Row xs={2} md={4} lg={6}>
-            <Films nameOfFilm="Twilight"></Films>
-          </Row>
-          <Row>
-            <Col>
-              <RowTitle text="Le nostre scelte per te"></RowTitle>
-            </Col>
-          </Row>
-          <Row xs={2} md={4} lg={6}>
-            <Films nameOfFilm="Pirates of the Caribbean"></Films>
-          </Row>
-          {/* <Container>
+            {/* <Container>
             <Profile></Profile>
           </Container> */}
-
-          <footer>
-            <MyFooter></MyFooter>
-          </footer>
-        </Container>
-      </main>
+          </Container>
+        </main>
+        <footer>
+          <MyFooter></MyFooter>
+        </footer>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 class CercaFilm extends Component {
   state = {
@@ -52,13 +54,20 @@ class CercaFilm extends Component {
         </Col>
 
         {this.state.searchedFilm.length > 0 ? (
-          <div className="row">
+          <Row className="mt-5">
             {this.state.searchedFilm.slice(0, 6).map((film) => (
-              <div key={film.imdbID} className="col-2">
-                <span className="text-white">{film.Title}</span>
-              </div>
+              <Col className="col-12 col-md-4 col-lg-3" key={film.imdbID}>
+                <Link to={"/Movies/" + film.imdbID}>
+                  <Card className="text-white bg-black">
+                    <Card.Img variant="top" src={film.Poster} />
+                    <Card.Body>
+                      <Card.Title>{film.Title}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Col>
             ))}
-          </div>
+          </Row>
         ) : (
           <p>Nessun film trovato</p>
         )}

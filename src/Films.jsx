@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Spinner } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
+import { Link } from "react-router-dom";
 
 class Films extends Component {
   state = {
@@ -43,9 +44,11 @@ class Films extends Component {
     ) : (
       this.state.film.slice(0, 6).map((film) => {
         return (
-          <div className="col mb-2 text-center px-1" key={film.imdbID}>
-            <img className="img-fluid" src={film.Poster} alt="moviepicture" />
-          </div>
+          <Link to={"/Movies/" + film.imdbID}>
+            <div className="col mb-2 text-center px-1" key={film.imdbID}>
+              <img className="img-fluid" src={film.Poster} alt="moviepicture" />
+            </div>
+          </Link>
         );
       })
     );
